@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04658F42152318310042C4E8 /* THButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 04658F40152318310042C4E8 /* THButton.h */; };
+		04658F43152318310042C4E8 /* THButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04658F41152318310042C4E8 /* THButton.m */; };
+		04911ACE1522A82C000AEF3D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04911ACD1522A82C000AEF3D /* Cocoa.framework */; };
+		04911AD01522A82C000AEF3D /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04911ACF1522A82C000AEF3D /* PreferencePanes.framework */; };
+		04911ADA1522A82C000AEF3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04911AD81522A82C000AEF3D /* InfoPlist.strings */; };
+		04911ADE1522A82C000AEF3D /* PrivateSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 04911ADD1522A82C000AEF3D /* PrivateSettings.m */; };
+		04911AE31522A82C000AEF3D /* PrivateSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04911AE11522A82C000AEF3D /* PrivateSettings.xib */; };
+		04911AEA1522A83B000AEF3D /* PrivateSettings.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 04911AE91522A83B000AEF3D /* PrivateSettings.tiff */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		04658F40152318310042C4E8 /* THButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THButton.h; sourceTree = "<group>"; };
+		04658F41152318310042C4E8 /* THButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THButton.m; sourceTree = "<group>"; };
+		04911ACA1522A82C000AEF3D /* PrivateSettings.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateSettings.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
+		04911ACD1522A82C000AEF3D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		04911ACF1522A82C000AEF3D /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
+		04911AD21522A82C000AEF3D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		04911AD31522A82C000AEF3D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		04911AD41522A82C000AEF3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		04911AD71522A82C000AEF3D /* PrivateSettings-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PrivateSettings-Info.plist"; sourceTree = "<group>"; };
+		04911AD91522A82C000AEF3D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04911ADB1522A82C000AEF3D /* PrivateSettings-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PrivateSettings-Prefix.pch"; sourceTree = "<group>"; };
+		04911ADC1522A82C000AEF3D /* PrivateSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSettings.h; sourceTree = "<group>"; };
+		04911ADD1522A82C000AEF3D /* PrivateSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSettings.m; sourceTree = "<group>"; };
+		04911AE21522A82C000AEF3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PrivateSettings.xib; sourceTree = "<group>"; };
+		04911AE91522A83B000AEF3D /* PrivateSettings.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PrivateSettings.tiff; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04911AC51522A82C000AEF3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04911ACE1522A82C000AEF3D /* Cocoa.framework in Frameworks */,
+				04911AD01522A82C000AEF3D /* PreferencePanes.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04911ABD1522A82C000AEF3D = {
+			isa = PBXGroup;
+			children = (
+				04911AD51522A82C000AEF3D /* PrivateSettings */,
+				04911ACC1522A82C000AEF3D /* Frameworks */,
+				04911ACB1522A82C000AEF3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04911ACB1522A82C000AEF3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04911ACA1522A82C000AEF3D /* PrivateSettings.prefPane */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04911ACC1522A82C000AEF3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04911ACD1522A82C000AEF3D /* Cocoa.framework */,
+				04911ACF1522A82C000AEF3D /* PreferencePanes.framework */,
+				04911AD11522A82C000AEF3D /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04911AD11522A82C000AEF3D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04911AD21522A82C000AEF3D /* AppKit.framework */,
+				04911AD31522A82C000AEF3D /* CoreData.framework */,
+				04911AD41522A82C000AEF3D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		04911AD51522A82C000AEF3D /* PrivateSettings */ = {
+			isa = PBXGroup;
+			children = (
+				04658F40152318310042C4E8 /* THButton.h */,
+				04658F41152318310042C4E8 /* THButton.m */,
+				04911ADC1522A82C000AEF3D /* PrivateSettings.h */,
+				04911ADD1522A82C000AEF3D /* PrivateSettings.m */,
+				04911AE91522A83B000AEF3D /* PrivateSettings.tiff */,
+				04911AE11522A82C000AEF3D /* PrivateSettings.xib */,
+				04911AD61522A82C000AEF3D /* Supporting Files */,
+			);
+			path = PrivateSettings;
+			sourceTree = "<group>";
+		};
+		04911AD61522A82C000AEF3D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04911AD71522A82C000AEF3D /* PrivateSettings-Info.plist */,
+				04911AD81522A82C000AEF3D /* InfoPlist.strings */,
+				04911ADB1522A82C000AEF3D /* PrivateSettings-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		04911AC61522A82C000AEF3D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04658F42152318310042C4E8 /* THButton.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		04911AC91522A82C000AEF3D /* PrivateSettings */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04911AE61522A82C000AEF3D /* Build configuration list for PBXNativeTarget "PrivateSettings" */;
+			buildPhases = (
+				04911AC41522A82C000AEF3D /* Sources */,
+				04911AC51522A82C000AEF3D /* Frameworks */,
+				04911AC61522A82C000AEF3D /* Headers */,
+				04911AC71522A82C000AEF3D /* Resources */,
+				04911AC81522A82C000AEF3D /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PrivateSettings;
+			productName = PrivateSettings;
+			productReference = 04911ACA1522A82C000AEF3D /* PrivateSettings.prefPane */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04911ABF1522A82C000AEF3D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 04911AC21522A82C000AEF3D /* Build configuration list for PBXProject "PrivateSettings" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 04911ABD1522A82C000AEF3D;
+			productRefGroup = 04911ACB1522A82C000AEF3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04911AC91522A82C000AEF3D /* PrivateSettings */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04911AC71522A82C000AEF3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04911ADA1522A82C000AEF3D /* InfoPlist.strings in Resources */,
+				04911AE31522A82C000AEF3D /* PrivateSettings.xib in Resources */,
+				04911AEA1522A83B000AEF3D /* PrivateSettings.tiff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		04911AC81522A82C000AEF3D /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04911AC41522A82C000AEF3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04911ADE1522A82C000AEF3D /* PrivateSettings.m in Sources */,
+				04658F43152318310042C4E8 /* THButton.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		04911AD81522A82C000AEF3D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04911AD91522A82C000AEF3D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		04911AE11522A82C000AEF3D /* PrivateSettings.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04911AE21522A82C000AEF3D /* en */,
+			);
+			name = PrivateSettings.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04911AE41522A82C000AEF3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		04911AE51522A82C000AEF3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		04911AE71522A82C000AEF3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PrivateSettings/PrivateSettings-Prefix.pch";
+				INFOPLIST_FILE = "PrivateSettings/PrivateSettings-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Debug;
+		};
+		04911AE81522A82C000AEF3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PrivateSettings/PrivateSettings-Prefix.pch";
+				INFOPLIST_FILE = "PrivateSettings/PrivateSettings-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = prefPane;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04911AC21522A82C000AEF3D /* Build configuration list for PBXProject "PrivateSettings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04911AE41522A82C000AEF3D /* Debug */,
+				04911AE51522A82C000AEF3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04911AE61522A82C000AEF3D /* Build configuration list for PBXNativeTarget "PrivateSettings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04911AE71522A82C000AEF3D /* Debug */,
+				04911AE81522A82C000AEF3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04911ABF1522A82C000AEF3D /* Project object */;
+}
