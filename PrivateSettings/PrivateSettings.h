@@ -19,6 +19,9 @@
     IBOutlet NSPopUpButton *dockMinEffectButton;
     
     IBOutlet NSButton *forceAirDropButton;
+    IBOutlet NSPopUpButton *startBgButton;
+    IBOutlet NSTextField *startBgPathField;
+    IBOutlet NSButton *safeSleepModeButton;
 }
 
 - (void)mainViewDidLoad;
@@ -33,6 +36,9 @@
 - (IBAction)dockMinEffectClick:(NSPopUpButton *)sender;
 
 - (IBAction)forceAirDropClick:(NSButton *)sender;
+
+- (IBAction)startBgSettingClick:(NSPopUpButton *)sender;
+- (IBAction)safeSleepModeClick:(NSButton *)sender;
 
 - (IBAction)uninstall:(id)sender;
 - (IBAction)aboutClidk:(id)sender;

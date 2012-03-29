@@ -7,11 +7,17 @@
 //
 
 #import "PrivateSettings.h"
+#import "STPrivilegedTask.h"
 
 @implementation PrivateSettings
 
+#define kPrivateSettingsTypeBool    @"-bool"
+#define kPrivateSettingsTypeString  @"-string"
+
 static NSString * allFormat[] = {@"png",@"tiff",@"jpg",@"gif",@"pdf"};
 static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
+static NSString * allBoolValue[] = {@"false",@"true"};
+static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 
 #define kPrivateSettingsKeyShowFile         @"showFile"
 #define kPrivateSettingsKeyShowFilePath     @"showFilePath"
@@ -20,6 +26,8 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
 #define kPrivateSettingsKeyDockKind         @"dockKind"
 #define kPrivateSettingsKeyDockMinEffect    @"dockMinEffect"
 #define kPrivateSettingsKeyAirDropForce     @"airDropForce"
+#define kPrivateSettingsKeyStartBg          @"startBg"
+#define kPrivateSettingsKeySafeSleepModel   @"safeSleepMode"
 
 - (void)mainViewDidLoad
 {
@@ -68,63 +76,47 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
     {
         [forceAirDropButton setState:[forceAirDrop intValue]];
     }
+    
+    NSNumber *startBgType = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeyStartBg];
+    [startBgPathField setStringValue:allStartBg[startBgType.integerValue]];
+    
+    NSNumber *safeSleepMode = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeySafeSleepModel];
+    [safeSleepModeButton setState:[safeSleepMode intValue]];
+}
+
+- (void)defaultsTaskWithPlistFile:(NSString *)fileName changeKey:(NSString *)key changeType:(NSString *)type changeValue:(NSString *)value
+{
+    NSArray *arguments = [NSArray arrayWithObjects:@"write",fileName,key,type,value, nil];
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/defaults"];
+    [task setArguments:arguments];
+    [task launch];
+}
+
+- (void)killAllTaskWithName:(NSString *)name
+{
+    NSArray *arguments = [NSArray arrayWithObjects:name, nil];
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/killall"];
+    [task setArguments:arguments];
+    [task launch];
 }
 
 - (IBAction)showFileClick:(NSButton *)sender
 {   
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.finder",@"AppleShowAllFiles",@"-bool", nil];
+    [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"AppleShowAllFiles" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[sender.state]];
+    [self killAllTaskWithName:@"Finder"];
     
-    if ([sender state]) 
-    {
-        [arguments addObject:@"true"];
-    }else {
-        [arguments addObject:@"false"];
-    }
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
-    
-    NSAppleScript *restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Finder\" to quit"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"delay 1"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Finder\" to activate"];
-    [restartFinder executeAndReturnError:nil];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender state]] forKey:kPrivateSettingsKeyShowFile];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeyShowFile];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (IBAction)showFilePathClick:(id)sender
+- (IBAction)showFilePathClick:(NSButton *)sender
 {
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.finder",@"_FXShowPosixPathInTitle",@"-bool", nil];
+    [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"_FXShowPosixPathInTitle" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[sender.state]];
+    [self killAllTaskWithName:@"Finder"];
     
-    if ([sender state]) 
-    {
-        [arguments addObject:@"true"];
-    }else {
-        [arguments addObject:@"false"];
-    }
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
-    
-    NSAppleScript *restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Finder\" to quit"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"delay 1"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Finder\" to activate"];
-    [restartFinder executeAndReturnError:nil];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender state]] forKey:kPrivateSettingsKeyShowFilePath];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeyShowFilePath];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -132,12 +124,7 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
 {
     NSInteger index = [sender indexOfSelectedItem];
     NSString * currentType = allFormat[index];
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.screencapture",@"type",currentType, nil];
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
+    [self defaultsTaskWithPlistFile:@"com.apple.screencapture" changeKey:@"type" changeType:kPrivateSettingsTypeString changeValue:currentType];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyCaptureFormat];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -146,12 +133,7 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
 - (IBAction)capturePathClick:(NSPathControl *)sender
 {
     NSString * currentPath = [sender.URL path];
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.screencapture",@"location",currentPath, nil];
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
+    [self defaultsTaskWithPlistFile:@"com.apple.screencapture" changeKey:@"location" changeType:kPrivateSettingsTypeString changeValue:currentPath];
     
     [[NSUserDefaults standardUserDefaults] setObject:currentPath forKey:kPrivateSettingsKeyCapturePath];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -159,34 +141,9 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
 
 - (IBAction)dockKinkClick:(NSMatrix *)sender
 {
-    NSInteger index = [sender selectedColumn];
-    
-    NSString *kind = nil;
-    if (index == 0)
-    {
-        kind = @"false";
-    }else {
-        kind = @"true";
-    }
-    
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.dock",@"no-glass",@"-bool",kind, nil];
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockKind];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSAppleScript *restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Dock\" to quit"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"delay 1"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Dock\" to activate"];
-    [restartFinder executeAndReturnError:nil];
+    NSInteger index = [sender selectedColumn];    
+    [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"no-glass" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[index]];
+    [self killAllTaskWithName:@"Dock"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockKind];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -195,22 +152,8 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
 - (IBAction)dockMinEffectClick:(NSPopUpButton *)sender
 {
     NSInteger index = [sender indexOfSelectedItem];
-    NSString * currentType = allMinEffect[index];
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.dock",@"mineffect",currentType, nil];
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
-    
-    NSAppleScript *restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Dock\" to quit"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"delay 1"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Dock\" to activate"];
-    [restartFinder executeAndReturnError:nil];
+    [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"mineffect" changeType:kPrivateSettingsTypeString changeValue:allMinEffect[index]];
+    [self killAllTaskWithName:@"Dock"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockMinEffect];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -218,30 +161,64 @@ static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
 
 - (IBAction)forceAirDropClick:(NSButton *)sender
 {
-    NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"write",@"com.apple.NetworkBrowser",@"BrowseAllInterfaces",@"-bool", nil];
-    
-    if ([sender state]) 
-    {
-        [arguments addObject:@"true"];
-    }else {
-        [arguments addObject:@"false"];
-    }
-    
-    NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:@"/usr/bin/defaults"];
-    [task setArguments:arguments];
-    [task launch];
-    
-    NSAppleScript *restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Finder\" to quit"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"delay 1"];
-    [restartFinder executeAndReturnError:nil];
-    
-    restartFinder = [[NSAppleScript alloc] initWithSource:@"tell application \"Finder\" to activate"];
-    [restartFinder executeAndReturnError:nil];
+    [self defaultsTaskWithPlistFile:@"com.apple.NetworkBrowser" changeKey:@"BrowseAllInterfaces" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[sender.state]];
+    [self killAllTaskWithName:@"Finder"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender state]] forKey:kPrivateSettingsKeyAirDropForce];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)startBgSettingClick:(NSPopUpButton *)sender
+{
+    NSString *sysStartBgFilePath = @"/System/Library/Frameworks/AppKit.framework/Versions/C/Resources/NSTexturedFullScreenBackgroundColor.png";
+    NSString *userStartBgFilePath = nil;
+    
+    if ([sender indexOfSelectedItem] == 1)
+    {
+        [startBgPathField setStringValue:@"系统默认"];
+        
+        userStartBgFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"NSTexturedFullScreenBackgroundColor" ofType:@"png"];        
+    }else 
+    {
+        NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+        [openPanel setCanChooseDirectories:NO];
+        [openPanel setCanChooseFiles:YES];
+        [openPanel setAllowsMultipleSelection:NO];
+        
+        NSArray* fileTypes = [[NSArray alloc] initWithObjects:@"png", nil];
+        int i = [openPanel runModalForTypes:fileTypes];
+        if(i == NSOKButton)
+        {
+            NSString *selectedFilePath = [[openPanel filenames] objectAtIndex:0];
+            [startBgPathField setStringValue:selectedFilePath];
+            userStartBgFilePath = selectedFilePath;
+        }
+    }
+    
+    if (userStartBgFilePath)
+    {
+        NSArray *arguments = [NSArray arrayWithObjects:userStartBgFilePath,sysStartBgFilePath,nil];
+        [STPrivilegedTask launchedPrivilegedTaskWithLaunchPath:@"/bin/cp" arguments:arguments];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender indexOfSelectedItem]] forKey:kPrivateSettingsKeyStartBg];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)safeSleepModeClick:(NSButton *)sender
+{
+    NSString *flag = nil;
+    if (sender.state)
+    {
+        flag = @"3";
+    }else {
+        flag = @"0";
+    }
+    
+    NSArray *arguments = [NSArray arrayWithObjects:@"-a",@"hibernatemode",flag,nil];
+    [STPrivilegedTask launchedPrivilegedTaskWithLaunchPath:@"/usr/bin/pmset" arguments:arguments];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeySafeSleepModel];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

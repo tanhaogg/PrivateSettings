@@ -9,17 +9,23 @@
 /* Begin PBXBuildFile section */
 		04658F42152318310042C4E8 /* THButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 04658F40152318310042C4E8 /* THButton.h */; };
 		04658F43152318310042C4E8 /* THButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04658F41152318310042C4E8 /* THButton.m */; };
+		046F73231524BBBF00BFE7E2 /* NSTexturedFullScreenBackgroundColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 046F73221524BBBF00BFE7E2 /* NSTexturedFullScreenBackgroundColor.png */; };
 		04911ACE1522A82C000AEF3D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04911ACD1522A82C000AEF3D /* Cocoa.framework */; };
 		04911AD01522A82C000AEF3D /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04911ACF1522A82C000AEF3D /* PreferencePanes.framework */; };
 		04911ADA1522A82C000AEF3D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04911AD81522A82C000AEF3D /* InfoPlist.strings */; };
 		04911ADE1522A82C000AEF3D /* PrivateSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 04911ADD1522A82C000AEF3D /* PrivateSettings.m */; };
 		04911AE31522A82C000AEF3D /* PrivateSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04911AE11522A82C000AEF3D /* PrivateSettings.xib */; };
 		04911AEA1522A83B000AEF3D /* PrivateSettings.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 04911AE91522A83B000AEF3D /* PrivateSettings.tiff */; };
+		04A49ED01524B8B9008B9EF6 /* STPrivilegedTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 04A49ECE1524B8B9008B9EF6 /* STPrivilegedTask.h */; };
+		04A49ED11524B8B9008B9EF6 /* STPrivilegedTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A49ECF1524B8B9008B9EF6 /* STPrivilegedTask.m */; };
+		04A49ED41524B8D6008B9EF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A49ED31524B8D6008B9EF6 /* Security.framework */; };
+		04A49ED61524B8DF008B9EF6 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A49ED51524B8DF008B9EF6 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04658F40152318310042C4E8 /* THButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THButton.h; sourceTree = "<group>"; };
 		04658F41152318310042C4E8 /* THButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THButton.m; sourceTree = "<group>"; };
+		046F73221524BBBF00BFE7E2 /* NSTexturedFullScreenBackgroundColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NSTexturedFullScreenBackgroundColor.png; sourceTree = "<group>"; };
 		04911ACA1522A82C000AEF3D /* PrivateSettings.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateSettings.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		04911ACD1522A82C000AEF3D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		04911ACF1522A82C000AEF3D /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
@@ -33,6 +39,10 @@
 		04911ADD1522A82C000AEF3D /* PrivateSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSettings.m; sourceTree = "<group>"; };
 		04911AE21522A82C000AEF3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PrivateSettings.xib; sourceTree = "<group>"; };
 		04911AE91522A83B000AEF3D /* PrivateSettings.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PrivateSettings.tiff; sourceTree = "<group>"; };
+		04A49ECE1524B8B9008B9EF6 /* STPrivilegedTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPrivilegedTask.h; sourceTree = "<group>"; };
+		04A49ECF1524B8B9008B9EF6 /* STPrivilegedTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPrivilegedTask.m; sourceTree = "<group>"; };
+		04A49ED31524B8D6008B9EF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		04A49ED51524B8DF008B9EF6 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A49ED61524B8DF008B9EF6 /* Carbon.framework in Frameworks */,
+				04A49ED41524B8D6008B9EF6 /* Security.framework in Frameworks */,
 				04911ACE1522A82C000AEF3D /* Cocoa.framework in Frameworks */,
 				04911AD01522A82C000AEF3D /* PreferencePanes.framework in Frameworks */,
 			);
@@ -68,6 +80,8 @@
 		04911ACC1522A82C000AEF3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04A49ED51524B8DF008B9EF6 /* Carbon.framework */,
+				04A49ED31524B8D6008B9EF6 /* Security.framework */,
 				04911ACD1522A82C000AEF3D /* Cocoa.framework */,
 				04911ACF1522A82C000AEF3D /* PreferencePanes.framework */,
 				04911AD11522A82C000AEF3D /* Other Frameworks */,
@@ -88,11 +102,14 @@
 		04911AD51522A82C000AEF3D /* PrivateSettings */ = {
 			isa = PBXGroup;
 			children = (
+				04A49ECE1524B8B9008B9EF6 /* STPrivilegedTask.h */,
+				04A49ECF1524B8B9008B9EF6 /* STPrivilegedTask.m */,
 				04658F40152318310042C4E8 /* THButton.h */,
 				04658F41152318310042C4E8 /* THButton.m */,
 				04911ADC1522A82C000AEF3D /* PrivateSettings.h */,
 				04911ADD1522A82C000AEF3D /* PrivateSettings.m */,
 				04911AE91522A83B000AEF3D /* PrivateSettings.tiff */,
+				046F73221524BBBF00BFE7E2 /* NSTexturedFullScreenBackgroundColor.png */,
 				04911AE11522A82C000AEF3D /* PrivateSettings.xib */,
 				04911AD61522A82C000AEF3D /* Supporting Files */,
 			);
@@ -117,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04658F42152318310042C4E8 /* THButton.h in Headers */,
+				04A49ED01524B8B9008B9EF6 /* STPrivilegedTask.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +193,7 @@
 				04911ADA1522A82C000AEF3D /* InfoPlist.strings in Resources */,
 				04911AE31522A82C000AEF3D /* PrivateSettings.xib in Resources */,
 				04911AEA1522A83B000AEF3D /* PrivateSettings.tiff in Resources */,
+				046F73231524BBBF00BFE7E2 /* NSTexturedFullScreenBackgroundColor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +216,7 @@
 			files = (
 				04911ADE1522A82C000AEF3D /* PrivateSettings.m in Sources */,
 				04658F43152318310042C4E8 /* THButton.m in Sources */,
+				04A49ED11524B8B9008B9EF6 /* STPrivilegedTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
