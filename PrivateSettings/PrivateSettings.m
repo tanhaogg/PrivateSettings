@@ -25,6 +25,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 #define kPrivateSettingsKeyCapturePath      @"capturePath"
 #define kPrivateSettingsKeyDockKind         @"dockKind"
 #define kPrivateSettingsKeyDockMinEffect    @"dockMinEffect"
+
 #define kPrivateSettingsKeyAirDropForce     @"airDropForce"
 #define kPrivateSettingsKeyStartBg          @"startBg"
 #define kPrivateSettingsKeySafeSleepModel   @"safeSleepMode"
@@ -91,6 +92,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
     [task setLaunchPath:@"/usr/bin/defaults"];
     [task setArguments:arguments];
     [task launch];
+    [task waitUntilExit];
 }
 
 - (void)killAllTaskWithName:(NSString *)name
@@ -220,6 +222,22 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeySafeSleepModel];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)purgeRAMClick:(id)sender
+{
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/usr/bin/purge"];
+    [task launch];
+}
+
+- (IBAction)diskutilClick:(id)sender
+{
+    NSArray *arguments = [NSArray arrayWithObjects:@"repairpermissions",@"/",nil];
+    NSTask *task = [[NSTask alloc] init];
+    [task setArguments:arguments];
+    [task setLaunchPath:@"/usr/sbin/diskutil"];
+    [task launch];
 }
 
 - (IBAction)uninstall:(id)sender

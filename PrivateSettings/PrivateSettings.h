@@ -12,6 +12,7 @@
 {
     IBOutlet NSButton *showFileButton;
     IBOutlet NSButton *showFilePathButton;
+    
     IBOutlet NSPopUpButton *captureFormatButton;
     IBOutlet NSPathControl *capturePathControl;
     
@@ -34,11 +35,15 @@
 
 - (IBAction)dockKinkClick:(NSMatrix *)sender;
 - (IBAction)dockMinEffectClick:(NSPopUpButton *)sender;
+- (IBAction)iconShadowClick:(NSButton *)sender;
 
 - (IBAction)forceAirDropClick:(NSButton *)sender;
 
 - (IBAction)startBgSettingClick:(NSPopUpButton *)sender;
 - (IBAction)safeSleepModeClick:(NSButton *)sender;
+
+- (IBAction)purgeRAMClick:(id)sender;
+- (IBAction)diskutilClick:(id)sender;
 
 - (IBAction)uninstall:(id)sender;
 - (IBAction)aboutClidk:(id)sender;
