@@ -14,24 +14,26 @@
 #define kPrivateSettingsTypeBool    @"-bool"
 #define kPrivateSettingsTypeString  @"-string"
 
-static NSString * allFormat[] = {@"png",@"tiff",@"jpg",@"gif",@"pdf"};
-static NSString * allMinEffect[] = {@"genie",@"scale",@"suck"};
-static NSString * allBoolValue[] = {@"false",@"true"};
-static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
+#define kPrivateSettingsKeyShowFile         @"tanhao.me.showFile"
+#define kPrivateSettingsKeyShowFilePath     @"tanhao.me.showFilePath"
+#define kPrivateSettingsKeyCaptureFormat    @"tanhao.me.captureFormat"
+#define kPrivateSettingsKeyCapturePath      @"tanhao.me.capturePath"
+#define kPrivateSettingsKeyDockKind         @"tanhao.me.dockKind"
+#define kPrivateSettingsKeyDockMinEffect    @"tanhao.me.dockMinEffect"
 
-#define kPrivateSettingsKeyShowFile         @"showFile"
-#define kPrivateSettingsKeyShowFilePath     @"showFilePath"
-#define kPrivateSettingsKeyCaptureFormat    @"captureFormat"
-#define kPrivateSettingsKeyCapturePath      @"capturePath"
-#define kPrivateSettingsKeyDockKind         @"dockKind"
-#define kPrivateSettingsKeyDockMinEffect    @"dockMinEffect"
-
-#define kPrivateSettingsKeyAirDropForce     @"airDropForce"
-#define kPrivateSettingsKeyStartBg          @"startBg"
-#define kPrivateSettingsKeySafeSleepModel   @"safeSleepMode"
+#define kPrivateSettingsKeyAirDropForce     @"tanhao.me.airDropForce"
+#define kPrivateSettingsKeyStartBg          @"tanhao.me.startBg"
+#define kPrivateSettingsKeySafeSleepModel   @"tanhao.me.safeSleepMode"
 
 - (void)mainViewDidLoad
 {
+    [super mainViewDidLoad];   
+    
+    allBoolValue = [[NSArray alloc] initWithObjects:@"false",@"true", nil];
+    allStartBg = [[NSArray alloc] initWithObjects:@"系统默认",@"用户定义",nil];
+    allMinEffect = [[NSArray alloc] initWithObjects:@"genie",@"scale",@"suck",nil];
+    allFormat = [[NSArray alloc] initWithObjects:@"png",@"tiff",@"jpg",@"gif",@"pdf",nil];
+    
     NSNumber *showFile = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeyShowFile];
     if (showFile)
     {
@@ -79,7 +81,9 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
     }
     
     NSNumber *startBgType = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeyStartBg];
-    [startBgPathField setStringValue:allStartBg[startBgType.integerValue]];
+    int startBgTypeIdx = [startBgType intValue];
+    NSString *startBgTypeString = [NSString stringWithString:[allStartBg objectAtIndex:startBgTypeIdx]];
+    [startBgPathField setStringValue:startBgTypeString];
     
     NSNumber *safeSleepMode = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeySafeSleepModel];
     [safeSleepModeButton setState:[safeSleepMode intValue]];
@@ -106,7 +110,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 
 - (IBAction)showFileClick:(NSButton *)sender
 {   
-    [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"AppleShowAllFiles" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[sender.state]];
+    [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"AppleShowAllFiles" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:sender.state]];
     [self killAllTaskWithName:@"Finder"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeyShowFile];
@@ -115,7 +119,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 
 - (IBAction)showFilePathClick:(NSButton *)sender
 {
-    [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"_FXShowPosixPathInTitle" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[sender.state]];
+    [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"_FXShowPosixPathInTitle" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:sender.state]];
     [self killAllTaskWithName:@"Finder"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeyShowFilePath];
@@ -123,9 +127,9 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 }
 
 - (IBAction)captureFormatClick:(NSPopUpButton *)sender
-{
+{    
     NSInteger index = [sender indexOfSelectedItem];
-    NSString * currentType = allFormat[index];
+    NSString * currentType = [allFormat objectAtIndex:index];
     [self defaultsTaskWithPlistFile:@"com.apple.screencapture" changeKey:@"type" changeType:kPrivateSettingsTypeString changeValue:currentType];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyCaptureFormat];
@@ -144,7 +148,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 - (IBAction)dockKinkClick:(NSMatrix *)sender
 {
     NSInteger index = [sender selectedColumn];    
-    [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"no-glass" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[index]];
+    [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"no-glass" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:index]];
     [self killAllTaskWithName:@"Dock"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockKind];
@@ -154,7 +158,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 - (IBAction)dockMinEffectClick:(NSPopUpButton *)sender
 {
     NSInteger index = [sender indexOfSelectedItem];
-    [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"mineffect" changeType:kPrivateSettingsTypeString changeValue:allMinEffect[index]];
+    [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"mineffect" changeType:kPrivateSettingsTypeString changeValue:[allMinEffect objectAtIndex:index]];
     [self killAllTaskWithName:@"Dock"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockMinEffect];
@@ -163,7 +167,7 @@ static NSString * allStartBg[] = {@"系统默认",@"用户定义"};
 
 - (IBAction)forceAirDropClick:(NSButton *)sender
 {
-    [self defaultsTaskWithPlistFile:@"com.apple.NetworkBrowser" changeKey:@"BrowseAllInterfaces" changeType:kPrivateSettingsTypeBool changeValue:allBoolValue[sender.state]];
+    [self defaultsTaskWithPlistFile:@"com.apple.NetworkBrowser" changeKey:@"BrowseAllInterfaces" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:sender.state]];
     [self killAllTaskWithName:@"Finder"];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender state]] forKey:kPrivateSettingsKeyAirDropForce];

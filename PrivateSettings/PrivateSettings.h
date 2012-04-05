@@ -23,6 +23,11 @@
     IBOutlet NSPopUpButton *startBgButton;
     IBOutlet NSTextField *startBgPathField;
     IBOutlet NSButton *safeSleepModeButton;
+    
+    NSArray *allBoolValue;
+    NSArray *allStartBg;
+    NSArray *allMinEffect;
+    NSArray *allFormat;
 }
 
 - (void)mainViewDidLoad;
@@ -35,7 +40,6 @@
 
 - (IBAction)dockKinkClick:(NSMatrix *)sender;
 - (IBAction)dockMinEffectClick:(NSPopUpButton *)sender;
-- (IBAction)iconShadowClick:(NSButton *)sender;
 
 - (IBAction)forceAirDropClick:(NSButton *)sender;
 

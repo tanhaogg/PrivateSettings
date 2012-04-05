@@ -906,7 +906,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 										</object>
 										<object class="NSMenuItem" id="593330667">
 											<reference key="NSMenu" ref="75998514"/>
-											<string key="NSTitle">用户定义</string>
+											<string key="NSTitle">用户定义(英文路径)</string>
 											<string key="NSKeyEquiv"/>
 											<int key="NSKeyEquivModMask">1048576</int>
 											<int key="NSMnemonicLoc">2147483647</int>
@@ -918,6 +918,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									</array>
 									<reference key="NSMenuFont" ref="559998875"/>
 								</object>
+								<int key="NSSelectedIndex">2</int>
 								<bool key="NSPullDown">YES</bool>
 								<int key="NSPreferredEdge">1</int>
 								<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1873,7 +1874,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="dockKinkClick:">NSMatrix</string>
 						<string key="dockMinEffectClick:">NSPopUpButton</string>
 						<string key="forceAirDropClick:">NSButton</string>
-						<string key="iconShadowClick:">NSButton</string>
 						<string key="purgeRAMClick:">id</string>
 						<string key="safeSleepModeClick:">NSButton</string>
 						<string key="showFileClick:">NSButton</string>
@@ -1908,10 +1908,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="IBActionInfo" key="forceAirDropClick:">
 							<string key="name">forceAirDropClick:</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBActionInfo" key="iconShadowClick:">
-							<string key="name">iconShadowClick:</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBActionInfo" key="purgeRAMClick:">
