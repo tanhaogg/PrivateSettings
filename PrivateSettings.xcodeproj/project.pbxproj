@@ -292,6 +292,7 @@
 		04911AE71522A82C000AEF3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PrivateSettings/PrivateSettings-Prefix.pch";
 				INFOPLIST_FILE = "PrivateSettings/PrivateSettings-Info.plist";
@@ -304,6 +305,7 @@
 		04911AE81522A82C000AEF3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PrivateSettings/PrivateSettings-Prefix.pch";
 				INFOPLIST_FILE = "PrivateSettings/PrivateSettings-Info.plist";

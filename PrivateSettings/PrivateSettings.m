@@ -97,6 +97,7 @@
     [task setArguments:arguments];
     [task launch];
     [task waitUntilExit];
+    [task release];
 }
 
 - (void)killAllTaskWithName:(NSString *)name
@@ -106,6 +107,7 @@
     [task setLaunchPath:@"/usr/bin/killall"];
     [task setArguments:arguments];
     [task launch];
+    [task release];
 }
 
 - (IBAction)showFileClick:(NSButton *)sender
@@ -233,6 +235,7 @@
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/usr/bin/purge"];
     [task launch];
+    [task release];
 }
 
 - (IBAction)diskutilClick:(id)sender
@@ -242,6 +245,7 @@
     [task setArguments:arguments];
     [task setLaunchPath:@"/usr/sbin/diskutil"];
     [task launch];
+    [task release];
 }
 
 - (IBAction)uninstall:(id)sender
