@@ -27,7 +27,7 @@
 
 - (void)mainViewDidLoad
 {
-    [super mainViewDidLoad];   
+    [super mainViewDidLoad];
     
     allBoolValue = [[NSArray alloc] initWithObjects:@"false",@"true", nil];
     allStartBg = [[NSArray alloc] initWithObjects:@"系统默认",@"用户定义",nil];
@@ -82,8 +82,11 @@
     
     NSNumber *startBgType = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeyStartBg];
     int startBgTypeIdx = [startBgType intValue];
-    NSString *startBgTypeString = [NSString stringWithString:[allStartBg objectAtIndex:startBgTypeIdx]];
-    [startBgPathField setStringValue:startBgTypeString];
+    if ([allStartBg count]>startBgTypeIdx)
+    {
+        NSString *startBgTypeString = [NSString stringWithString:[allStartBg objectAtIndex:startBgTypeIdx]];
+        [startBgPathField setStringValue:startBgTypeString];
+    }
     
     NSNumber *safeSleepMode = [[NSUserDefaults standardUserDefaults] objectForKey:kPrivateSettingsKeySafeSleepModel];
     [safeSleepModeButton setState:[safeSleepMode intValue]];
@@ -115,7 +118,7 @@
     [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"AppleShowAllFiles" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:sender.state]];
     [self killAllTaskWithName:@"Finder"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeyShowFile];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:sender.state] forKey:kPrivateSettingsKeyShowFile];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -124,7 +127,7 @@
     [self defaultsTaskWithPlistFile:@"com.apple.finder" changeKey:@"_FXShowPosixPathInTitle" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:sender.state]];
     [self killAllTaskWithName:@"Finder"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeyShowFilePath];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:sender.state] forKey:kPrivateSettingsKeyShowFilePath];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -134,7 +137,7 @@
     NSString * currentType = [allFormat objectAtIndex:index];
     [self defaultsTaskWithPlistFile:@"com.apple.screencapture" changeKey:@"type" changeType:kPrivateSettingsTypeString changeValue:currentType];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyCaptureFormat];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:index] forKey:kPrivateSettingsKeyCaptureFormat];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -153,7 +156,7 @@
     [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"no-glass" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:index]];
     [self killAllTaskWithName:@"Dock"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockKind];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:index] forKey:kPrivateSettingsKeyDockKind];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -163,7 +166,7 @@
     [self defaultsTaskWithPlistFile:@"com.apple.dock" changeKey:@"mineffect" changeType:kPrivateSettingsTypeString changeValue:[allMinEffect objectAtIndex:index]];
     [self killAllTaskWithName:@"Dock"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:index] forKey:kPrivateSettingsKeyDockMinEffect];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:index] forKey:kPrivateSettingsKeyDockMinEffect];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -172,7 +175,7 @@
     [self defaultsTaskWithPlistFile:@"com.apple.NetworkBrowser" changeKey:@"BrowseAllInterfaces" changeType:kPrivateSettingsTypeBool changeValue:[allBoolValue objectAtIndex:sender.state]];
     [self killAllTaskWithName:@"Finder"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender state]] forKey:kPrivateSettingsKeyAirDropForce];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[sender state]] forKey:kPrivateSettingsKeyAirDropForce];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -194,13 +197,16 @@
         [openPanel setAllowsMultipleSelection:NO];
         
         NSArray* fileTypes = [[NSArray alloc] initWithObjects:@"png", nil];
-        int i = [openPanel runModalForTypes:fileTypes];
+        [openPanel setAllowedFileTypes:fileTypes];
+        NSInteger i = [openPanel runModal];
+        //int i = [openPanel runModalForTypes:fileTypes];
         if(i == NSOKButton)
         {
-            NSString *selectedFilePath = [[openPanel filenames] objectAtIndex:0];
+            NSString *selectedFilePath = [[[openPanel URLs] objectAtIndex:0] path];
             [startBgPathField setStringValue:selectedFilePath];
             userStartBgFilePath = selectedFilePath;
         }
+        [fileTypes release];
     }
     
     if (userStartBgFilePath)
@@ -209,7 +215,7 @@
         [STPrivilegedTask launchedPrivilegedTaskWithLaunchPath:@"/bin/cp" arguments:arguments];
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[sender indexOfSelectedItem]] forKey:kPrivateSettingsKeyStartBg];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:[sender indexOfSelectedItem]] forKey:kPrivateSettingsKeyStartBg];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -226,7 +232,7 @@
     NSArray *arguments = [NSArray arrayWithObjects:@"-a",@"hibernatemode",flag,nil];
     [STPrivilegedTask launchedPrivilegedTaskWithLaunchPath:@"/usr/bin/pmset" arguments:arguments];
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:sender.state] forKey:kPrivateSettingsKeySafeSleepModel];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithLong:sender.state] forKey:kPrivateSettingsKeySafeSleepModel];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
